@@ -1,0 +1,95 @@
+    {% extends "base.html" %}
+    {% load static %}
+    {% block cuerpo %}
+    <div class="row"><!--lafila-->
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!--columna izquierda-->
+        <h1>INSTRUMENTO</h1>
+        <div class="card">
+          <div class="card-body">
+            <form action="registrarInstrumento/" method="POST" >{% csrf_token %}
+              <div class= "form-group">
+                <input type="number" id="numcodigo" name="numcodigo" class="form-control"
+                placeholder = "Codigo Instrumento" minLength="6" maxLength= "6" required>
+              </div>
+
+              <div class= "form-group py-3">
+                <input type="text" id="txttipo_instrumento" name="txttipo_instrumento" class="form-control"
+                placeholder = "Tipo Instrumento" maxLength= "100" required>
+              </div>
+
+              <div class= "form-group py-2">
+                <input type="text" id="txtcolor" name="txtcolor" class="form-control"
+                placeholder = "Color Instrumento" maxLength= "100" required>
+              </div>
+
+              <div class= "form-group py-2">
+                <input type="text" id="txtmarca" name="txtmarca" class="form-control"
+                placeholder = "Marca Instrumento" maxLength= "100" required>
+              </div>
+
+              <div class="form-group py-2">
+                <input type="number" id="numprecio" name="numprecio" class="form-control"
+                placeholder="Precio Instrumento" step="0.01" required>
+              </div>    
+              
+              <div class= "form-group py-2">
+                <input type="text" id="txtnombre" name="txtnombre" class="form-control"
+                placeholder = "Nombre Instrumento" maxLength= "100" required>
+              </div>
+
+              <div class= "form-group py-2">
+                <input type="text" id="txttamaño" name="txttamaño" class="form-control"
+                placeholder = "Tamaño Instrumento" maxLength= "100" required>
+              </div>
+
+              <div class= "form-group py-2">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+
+            </form><!--formulario-->
+          </div>
+        </div>
+    </div><!--columna izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-4"><!--columna derecha-->
+        <h1>Lista instrumentos</h1>
+        <img class="w-50" src="{% static  'img/guitarra.jpg' %}" alt="everesgei" width="100" height="auto">
+        <div class="table responsive">
+            <table class= "table table-striped">
+
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Tamaño</th>
+                    <th colspan="2">EDITAR - BORRAR</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 {% for m in misinstrumentos  %}
+                 <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{m.codigo}}</td>
+                    <td>{{m.tipo_instrumento}}</td>
+                    <td>{{m.color}}</td>
+                    <td>{{m.marca}}</td>
+                    <td>{{m.precio}}</td>
+                    <td>{{m.nombre}}</td>
+                    <td>{{m.tamaño}}</td>
+                    <td> <a href="seleccionarInstrumentos/{{m.codigo}}"  class="btn btn-info">Editar </a></td>
+                    <td> <a href="borrarInstrumento/{{m.codigo}}" class="btn btn-danger">Borrar </a></td>
+                 </tr>
+                 
+                 {% endfor %}
+                </tbody>
+              </table>
+        </div>
+
+    </div><!--columna derecha-->
+    </div><!--lafila-->
+    {% endblock %}

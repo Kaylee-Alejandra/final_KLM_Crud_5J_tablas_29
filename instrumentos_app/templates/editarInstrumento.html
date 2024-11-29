@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+    <!--La targeta card-->
+    <div class="card">
+        <div class="card-body">
+          <form action="/editarInstrumento/" method="POST" >{% csrf_token %}
+
+            <div class= "form-group">
+              <input type="number" id="numcodigo" name="numcodigo" class="form-control"
+              value="{{misinstrumentos.codigo}}" readonly maxLength= "6" required><!--readonly-->
+            </div>
+
+            <div class= "form-group py-3">
+              <input type="text" id="txttipo_instrumento" name="txttipo_instrumento" class="form-control"
+              value="{{misinstrumentos.tipo_instrumento}}" maxLength= "100" required>
+            </div>
+
+            <div class= "form-group py-3">
+              <input type="text" id="txtcolor" name="txtcolor" class="form-control"
+              value="{{misinstrumentos.color}}" maxLength= "100" required>
+            </div>
+
+            <div class= "form-group py-3">
+              <input type="text" id="txtmarca" name="txtmarca" class="form-control"
+              value="{{misinstrumentos.marca}}" maxLength= "100" required>
+            </div>
+
+            <div class= "form-group py-2">
+              <input type="number" id="numprecio" name="numprecio" class="form-control"
+              value="{{misinstrumentos.precio}}"  minLength= "1" maxLength= "9" step="0.01" required>
+            </div>
+
+            <div class= "form-group py-3">
+              <input type="text" id="txtnombre" name="txtnombre" class="form-control"
+              value="{{misinstrumentos.nombre}}" maxLength= "100" required>
+            </div>
+
+            <div class= "form-group py-3">
+              <input type="text" id="txttamaño" name="txttamaño" class="form-control"
+              value="{{misinstrumentos.tamaño}}" maxLength= "100" required>
+            </div>
+
+            <div class= "form-group py-2">
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+
+          </form><!--formulario-->
+        </div>
+      </div>
+
+
+    </div><!--columna-->
+</div><!--fila-->
+
+{% endblock %}

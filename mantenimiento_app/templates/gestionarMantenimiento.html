@@ -1,0 +1,95 @@
+    {% extends "base.html" %}
+    {% load static %}
+    {% block cuerpo %}
+    <div class="row"><!--lafila-->
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"><!--columna izquierda-->
+        <h1>MANTENIMIENTO</h1>
+        <div class="card">
+          <div class="card-body">
+            <form action="registrarMantenimiento/" method="POST" >{% csrf_token %}
+              <div class= "form-group">
+                <input type="number" id="numid_mantenimiento" name="numid_mantenimiento" class="form-control"
+                 placeholder="ID del Mantenimiento" maxLength= "6" required><!--readonly-->
+              </div>
+  
+              <div class= "form-group py-3">
+                <input type="text" id="txthorarios" name="txthorarios" class="form-control"
+                placeholder="Horario del Mantenimiento" maxLength= "100" required>
+              </div>
+  
+              <div class= "form-group py-3">
+                <input type="text" id="txtpisos" name="txtpisos" class="form-control"
+                placeholder="piso del Mantenimiento" maxLength= "100" required>
+              </div>
+  
+              <div class= "form-group py-3">
+                <input type="text" id="txtinstrumentos" name="txtinstrumentos" class="form-control"
+                placeholder="instrumentos en Mantenimiento" maxLength= "100" required>
+              </div>
+  
+              <div class= "form-group py-2">
+                <input type="text" id="txtoficinas" name="txtoficinas" class="form-control"
+                placeholder="Oficinas del Mantenimiento"  maxLength= "100" required>
+              </div>
+  
+              <div class= "form-group py-3">
+                <input type="text" id="txtempleados" name="txtempleados" class="form-control"
+                placeholder="Empleados de Mantenimiento" maxLength= "100" required>
+              </div>
+  
+              <div class= "form-group py-3">
+                <input type="text" id="txtmateriales" name="txtmateriales" class="form-control"
+                placeholder="Materiales para el Mantenimiento" maxLength= "100" required>
+              </div>
+  
+              <div class= "form-group py-2">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+              </div>
+  
+            </form><!--formulario-->
+          </div>
+        </div>
+    </div><!--columna izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-4"><!--columna derecha-->
+        <h1>Lista Mantenimiento</h1>
+        <img class="w-50" src="{% static  'img/mantenimiento.jpg' %}" alt="everesgei" width="100" height="auto">
+        <div class="table responsive">
+            <table class= "table table-striped">
+
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID Mantenimiento</th>
+                    <th scope="col">Horarios</th>
+                    <th scope="col">Pisos</th>
+                    <th scope="col">instrumentos</th>
+                    <th scope="col">Oficinas</th>
+                    <th scope="col">Empleados</th>
+                    <th scope="col">Materiales</th>
+                    <th colspan="2">EDITAR - BORRAR</th>
+                  </tr>
+                </thead>
+                <tbody>
+                 {% for m in mismantenimiento  %}
+                 <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{m.id_mantenimiento}}</td>
+                    <td>{{m.horarios}}</td>
+                    <td>{{m.pisos}}</td>
+                    <td>{{m.instrumentos}}</td>
+                    <td>{{m.oficinas}}</td>
+                    <td>{{m.empleados}}</td>
+                    <td>{{m.materiales}}</td>
+                    <td> <a href="seleccionarMantenimiento/{{m.id_mantenimiento}}"  class="btn btn-info">Editar </a></td>
+                    <td> <a href="borrarMantenimiento/{{m.id_mantenimiento}}" class="btn btn-danger">Borrar </a></td>
+                 </tr>
+                 
+                 {% endfor %}
+                </tbody>
+              </table>
+        </div>
+
+    </div><!--columna derecha-->
+    </div><!--lafila-->
+    {% endblock %}
